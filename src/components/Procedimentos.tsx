@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
 import { asset } from '../lib/asset';
+import { useCursorGlow } from '../hooks/useCursorGlow';
 import Reveal from './Reveal';
 
 const PROCEDIMENTOS = [
@@ -97,10 +98,16 @@ function ProcCard({
   waCtx,
   cta,
 }: (typeof PROCEDIMENTOS)[0]) {
+  const onMove = useCursorGlow<HTMLAnchorElement>();
   return (
-    <div
-      className="flex flex-col group cursor-default tilt-card h-full"
-      style={{ background: 'var(--bg-card)', border: '1px solid transparent' }}
+    <a
+      href={buildWaLink(waCtx)}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseMove={onMove}
+      aria-label={`${cta} no WhatsApp`}
+      className="flex flex-col group cursor-pointer tilt-card cta-magnetic h-full no-underline"
+      style={{ background: 'var(--bg-card)', border: '1px solid transparent', color: 'inherit', textDecoration: 'none' }}
     >
       <div className="relative overflow-hidden" style={{ height: '200px' }}>
         <img
@@ -138,19 +145,14 @@ function ProcCard({
           ))}
         </ul>
 
-        <a
-          href={buildWaLink(waCtx)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 uppercase tracking-widest font-semibold transition-colors duration-200 mt-3"
+        <span
+          className="flex items-center gap-1.5 uppercase tracking-widest font-semibold transition-colors duration-200 mt-3 group-hover:text-[var(--text-1)]"
           style={{ color: 'var(--gold)', fontSize: '0.65rem' }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-1)')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--gold)')}
         >
-          {cta} <ArrowRight size={12} aria-hidden="true" />
-        </a>
+          {cta} <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </span>
       </div>
-    </div>
+    </a>
   );
 }
 

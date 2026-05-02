@@ -14,17 +14,17 @@ type WaContext =
   | 'float';
 
 const MESSAGES: Record<WaContext, string> = {
-  navbar: 'Olá Dra. Lara! Vim pelo site e quero agendar uma avaliação.',
-  hero: 'Olá Dra. Lara! Vim pelo site e quero agendar uma avaliação dermatológica.',
-  sobre: 'Olá Dra. Lara! Vim pelo site e quero conversar sobre uma avaliação.',
-  botox: 'Olá Dra. Lara! Tenho dúvidas sobre toxina botulínica. Posso te explicar minha queixa?',
-  preenchimento: 'Olá Dra. Lara! Tenho dúvidas sobre preenchimento com ácido hialurônico.',
-  harmonizacao: 'Olá Dra. Lara! Quero saber se sou indicada para harmonização facial.',
-  complementares: 'Olá Dra. Lara! Quero entender bioestimuladores e skinbooster para meu caso.',
-  depoimentos: 'Olá Dra. Lara! Vi os depoimentos no site e quero saber mais.',
-  localizacao: 'Olá Dra. Lara! Quero agendar uma avaliação no consultório de Olímpia.',
-  footer: 'Olá Dra. Lara! Vim pelo site e quero conversar.',
-  float: 'Olá Dra. Lara! Estou no site e quero falar com você.',
+  navbar: 'Olá Dra. Lara! Vi seu site e quero marcar uma avaliação. Pode me passar os horários disponíveis?',
+  hero: 'Olá Dra. Lara! Quero marcar uma avaliação dermatológica. Quais são os próximos horários?',
+  sobre: 'Olá Dra. Lara! Vi seu site, gostei do seu jeito de atender e quero marcar uma avaliação.',
+  botox: 'Olá Dra. Lara! Tenho dúvidas sobre toxina botulínica. Posso te mandar uma foto da minha região de expressão para você me orientar?',
+  preenchimento: 'Olá Dra. Lara! Tenho dúvida sobre preenchimento. Posso te mandar uma foto da área que me incomoda para você dizer se é meu caso?',
+  harmonizacao: 'Olá Dra. Lara! Quero saber se sou candidata para harmonização facial. Posso te mandar fotos do meu rosto para avaliação?',
+  complementares: 'Olá Dra. Lara! Quero saber se bioestimuladores ou skinbooster fazem sentido para a minha pele. Como faço para avaliar?',
+  depoimentos: 'Olá Dra. Lara! Vi os depoimentos no site, gostei muito e quero conversar.',
+  localizacao: 'Olá Dra. Lara! Quero marcar uma avaliação no consultório de Olímpia. Quais horários você tem disponíveis?',
+  footer: 'Olá Dra. Lara! Tenho uma queixa específica e gostaria de te mandar uma foto para você me orientar antes de marcar.',
+  float: 'Olá Dra. Lara! Estou navegando seu site agora, tenho uma dúvida específica e queria sua avaliação. Posso te mandar uma foto?',
 };
 
 export function buildWaLink(context: WaContext): string {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
+import { useCursorGlow } from '../hooks/useCursorGlow';
 import ThemeToggle from './ThemeToggle';
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const onMove = useCursorGlow<HTMLAnchorElement>();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -70,19 +72,9 @@ export default function Navbar() {
             href={buildWaLink('navbar')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold px-4 py-2.5 cta-gold whitespace-nowrap"
-            style={{
-              border: '1px solid var(--gold)',
-              color: 'var(--gold)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--gold)';
-              e.currentTarget.style.color = 'var(--text-on-gold)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.color = 'var(--gold)';
-            }}
+            onMouseMove={onMove}
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold px-4 py-2.5 cta-magnetic cta-magnetic-gold whitespace-nowrap"
+            style={{ border: '1px solid var(--gold)', color: 'var(--gold)', background: 'transparent' }}
           >
             WhatsApp
           </a>

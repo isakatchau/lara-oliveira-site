@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { buildWaLink } from '../lib/whatsapp';
+import { useCursorGlow } from '../hooks/useCursorGlow';
 
 export default function WhatsAppFloat() {
   const [visible, setVisible] = useState(false);
+  const onMove = useCursorGlow<HTMLAnchorElement>();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 320);
@@ -16,13 +18,14 @@ export default function WhatsAppFloat() {
       href={buildWaLink('float')}
       target="_blank"
       rel="noopener noreferrer"
+      onMouseMove={onMove}
       aria-label="Falar com a Dra. Lara no WhatsApp"
-      className="fixed z-[60] bottom-5 right-5 lg:bottom-7 lg:right-7 wpp-pulse"
+      className="fixed z-[60] bottom-5 right-5 lg:bottom-7 lg:right-7 wpp-pulse cta-magnetic cta-magnetic-green"
       style={{
         background: '#25D366',
         color: '#fff',
-        width: '58px',
-        height: '58px',
+        width: '60px',
+        height: '60px',
         borderRadius: '50%',
         display: visible ? 'flex' : 'none',
         alignItems: 'center',

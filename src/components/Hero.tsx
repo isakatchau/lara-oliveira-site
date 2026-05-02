@@ -1,9 +1,12 @@
 import { MapPin, Clock } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
+import { useCursorGlow } from '../hooks/useCursorGlow';
 import Picture from './Picture';
 import Reveal from './Reveal';
 
 export default function Hero() {
+  const onMove = useCursorGlow<HTMLAnchorElement>();
+
   return (
     <section
       id="inicio"
@@ -77,11 +80,12 @@ export default function Hero() {
                   href={buildWaLink('hero')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-7 py-4 self-start cta-glow"
+                  onMouseMove={onMove}
+                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-7 py-4 self-start cta-magnetic cta-magnetic-green"
                   style={{ background: '#25D366', color: '#fff' }}
                 >
                   <WhatsAppIcon />
-                  Falar comigo no WhatsApp
+                  Marcar minha avaliação
                 </a>
                 <p
                   className="flex items-center gap-2 font-light"

@@ -172,26 +172,84 @@ a, button {
 }
 .mesh-anim { animation: meshFloat 18s ease-in-out infinite; }
 
-/* CTAs */
-.cta-glow {
+/* ---------- CTAs ---------- */
+
+/* Magnetic spotlight that follows the cursor (via JS-set --mx, --my). */
+.cta-magnetic {
   position: relative;
-  transition: transform 250ms ease, box-shadow 300ms ease;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 280ms ease,
+    background 220ms ease,
+    color 220ms ease;
 }
-.cta-glow:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 16px 40px -12px rgba(37, 211, 102, 0.55);
+.cta-magnetic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 140px at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.38),
+    rgba(255, 255, 255, 0) 60%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 0;
 }
-.cta-gold {
-  position: relative;
-  transition: background 250ms ease, color 250ms ease, transform 250ms ease, box-shadow 300ms ease;
+.cta-magnetic:hover::before { opacity: 1; }
+.cta-magnetic > * { position: relative; z-index: 1; }
+
+/* Green WhatsApp variant — breathing shadow + magnetic + 3D lift. */
+@keyframes ctaBreathe {
+  0%, 100% { box-shadow: 0 10px 28px -10px rgba(37, 211, 102, 0.32); }
+  50%      { box-shadow: 0 16px 38px -10px rgba(37, 211, 102, 0.55); }
 }
-.cta-gold:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 36px -16px rgba(201, 169, 122, 0.55);
+.cta-magnetic-green {
+  animation: ctaBreathe 3.2s ease-in-out infinite;
 }
-[data-theme='light'] .cta-gold:hover {
-  box-shadow: 0 14px 36px -16px rgba(139, 111, 63, 0.45);
+.cta-magnetic-green:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    0 24px 56px -14px rgba(37, 211, 102, 0.60),
+    0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+  animation: none;
 }
+.cta-magnetic-green:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Gold outline variant — fills on hover with magnetic shimmer. */
+.cta-magnetic-gold {
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 280ms ease,
+    background 220ms ease,
+    color 220ms ease;
+}
+.cta-magnetic-gold:hover {
+  transform: translateY(-2px);
+  background: var(--gold);
+  color: var(--text-on-gold);
+  box-shadow: 0 18px 42px -14px rgba(201, 169, 122, 0.55);
+}
+.cta-magnetic-gold:active {
+  transform: translateY(0);
+}
+[data-theme='light'] .cta-magnetic-gold:hover {
+  box-shadow: 0 18px 42px -14px rgba(139, 111, 63, 0.45);
+}
+
+/* Legacy aliases — kept so older usages still work. */
+.cta-glow { position: relative; transition: transform 250ms ease, box-shadow 300ms ease; }
+.cta-glow:hover { transform: translateY(-1px); box-shadow: 0 16px 40px -12px rgba(37, 211, 102, 0.55); }
+.cta-gold { position: relative; transition: background 250ms ease, color 250ms ease, transform 250ms ease, box-shadow 300ms ease; }
+.cta-gold:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -16px rgba(201, 169, 122, 0.55); }
+[data-theme='light'] .cta-gold:hover { box-shadow: 0 14px 36px -16px rgba(139, 111, 63, 0.45); }
 
 /* WhatsApp float pulse */
 @keyframes wppPulse {
@@ -212,4 +270,6 @@ a, button {
   .tilt-card:hover { transform: none; }
   .mesh-anim { animation: none; }
   .wpp-pulse { animation: none; }
+  .cta-magnetic-green { animation: none; }
+  .cta-magnetic::before { display: none; }
 }

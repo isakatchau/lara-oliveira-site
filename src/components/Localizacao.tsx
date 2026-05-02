@@ -1,11 +1,13 @@
-import { Phone, MessageCircle } from 'lucide-react';
+import { HelpCircle, MessageCircle } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
 import { asset } from '../lib/asset';
+import { useCursorGlow } from '../hooks/useCursorGlow';
 import Reveal from './Reveal';
 
 const MAPS_LINK = 'https://maps.google.com/?q=R.+Conselheiro+Antônio+Prado,+37,+Jardim+Glória,+Olímpia+SP';
 
 export default function Localizacao() {
+  const onMove = useCursorGlow<HTMLAnchorElement>();
   return (
     <section id="contato" style={{ background: 'var(--bg-2)', borderTop: '1px solid var(--line)' }}>
       <div className="max-w-7xl mx-auto">
@@ -57,25 +59,19 @@ export default function Localizacao() {
                   href={MAPS_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center uppercase tracking-widest font-semibold text-[11px] px-5 py-3 cta-gold"
-                  style={{ border: '1px solid var(--gold)', color: 'var(--gold)' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--gold)';
-                    e.currentTarget.style.color = 'var(--text-on-gold)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--gold)';
-                  }}
+                  onMouseMove={onMove}
+                  className="inline-flex items-center justify-center uppercase tracking-widest font-semibold text-[11px] px-5 py-3 cta-magnetic cta-magnetic-gold"
+                  style={{ border: '1px solid var(--gold)', color: 'var(--gold)', background: 'transparent' }}
                 >
                   Ver no mapa
                 </a>
                 <a
-                  href="tel:+5517988094895"
-                  className="inline-flex items-center gap-2 uppercase tracking-widest font-semibold text-[11px] px-5 py-3"
-                  style={{ border: '1px solid var(--line-strong)', color: 'var(--text-2)' }}
+                  href="#falar"
+                  onMouseMove={onMove}
+                  className="inline-flex items-center gap-2 uppercase tracking-widest font-semibold text-[11px] px-5 py-3 cta-magnetic cta-magnetic-gold"
+                  style={{ border: '1px solid var(--gold)', color: 'var(--gold)', background: 'transparent' }}
                 >
-                  <Phone size={13} aria-hidden="true" /> (17) 98809-4895
+                  <HelpCircle size={13} aria-hidden="true" /> Tirar uma dúvida
                 </a>
               </div>
             </Reveal>
@@ -98,7 +94,8 @@ export default function Localizacao() {
       </div>
 
       <div
-        className="relative overflow-hidden py-16 lg:py-20 text-center"
+        id="falar"
+        className="relative overflow-hidden py-16 lg:py-20 text-center scroll-mt-24"
         style={{ background: 'var(--bg-deep)', borderTop: '1px solid var(--line)' }}
       >
         <div
@@ -139,7 +136,8 @@ export default function Localizacao() {
               href={buildWaLink('footer')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-8 py-4 cta-glow mt-2"
+              onMouseMove={onMove}
+              className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-8 py-4 cta-magnetic cta-magnetic-green mt-2"
               style={{ background: '#25D366', color: '#fff' }}
             >
               <MessageCircle size={15} aria-hidden="true" />
