@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
 import { useCursorGlow } from '../hooks/useCursorGlow';
@@ -89,9 +90,7 @@ export default function Procedimentos() {
           style={{ background: 'var(--line)' }}
         >
           {PROCEDIMENTOS.map((proc, i) => (
-            <Reveal key={proc.id} delay={i * 80}>
-              <ProcCard {...proc} />
-            </Reveal>
+            <ProcCard key={proc.id} proc={proc} index={i} />
           ))}
         </div>
 
@@ -109,17 +108,36 @@ export default function Procedimentos() {
   );
 }
 
-function ProcCard({ title, subtitle, art, items, waCtx, cta }: Proc) {
+function ProcCard({ proc, index }: { proc: Proc; index: number }) {
   const onMove = useCursorGlow<HTMLAnchorElement>();
+  const { title, subtitle, art, items, waCtx, cta } = proc;
+
   return (
-    <a
+    <motion.a
       href={buildWaLink(waCtx)}
       target="_blank"
       rel="noopener noreferrer"
       onMouseMove={onMove}
       aria-label={`${cta} no WhatsApp`}
-      className="flex flex-col group cursor-pointer tilt-card h-full no-underline"
+      className="tilt-card flex flex-col group cursor-pointer h-full no-underline relative"
       style={{ background: 'var(--bg-card)', color: 'inherit', textDecoration: 'none' }}
+      // Scroll reveal handled by motion (replaces Reveal wrapper to avoid
+      // creating a parent stacking context that broke z-index ordering).
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+      transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.08 }}
+      // Hover: lift + scale + bring forward via z-index. Motion guarantees
+      // z-index updates immediately on enter and lingers during exit
+      // animation, so the hovered card always paints above its neighbors.
+      whileHover={{
+        y: -10,
+        scale: 1.025,
+        zIndex: 50,
+        boxShadow:
+          '0 0 80px -10px rgba(201, 169, 122, 0.40), 0 36px 80px -22px rgba(0, 0, 0, 0.70)',
+        transition: { duration: 0.36, ease: [0.22, 0.61, 0.36, 1] },
+      }}
     >
       <div
         className="relative overflow-hidden"
@@ -161,10 +179,11 @@ function ProcCard({ title, subtitle, art, items, waCtx, cta }: Proc) {
           className="flex items-center gap-1.5 uppercase tracking-widest font-semibold transition-colors duration-200 mt-3 group-hover:text-[var(--text-1)]"
           style={{ color: 'var(--gold)', fontSize: '0.65rem' }}
         >
-          {cta} <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+          {cta}
+          <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
         </span>
       </div>
-    </a>
+    </motion.a>
   );
 }
 

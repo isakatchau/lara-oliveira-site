@@ -1,3 +1,4 @@
+import { Instagram } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Sobre from './components/Sobre';
@@ -38,7 +39,7 @@ export default function App() {
             className="inline-flex items-center gap-1.5 transition-colors duration-200 hover:text-[var(--text-1)]"
             style={{ color: 'var(--gold)' }}
           >
-            <InstagramIcon />
+            <Instagram size={13} strokeWidth={1.6} aria-hidden="true" />
             <span>@dralaraoliveira</span>
           </a>
         </p>
@@ -47,25 +48,5 @@ export default function App() {
       <WhatsAppFloat />
       <CursorGlow />
     </>
-  );
-}
-
-function InstagramIcon() {
-  return (
-    <svg
-      width="13"
-      height="13"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
   );
 }
