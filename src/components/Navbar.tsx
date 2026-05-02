@@ -40,16 +40,16 @@ export default function Navbar() {
         borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
       }}
     >
-      <div className="max-w-7xl mx-auto px-5 lg:px-10 flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-7xl mx-auto px-5 lg:px-10 flex lg:grid lg:grid-cols-[1fr_auto_1fr] items-center justify-between lg:justify-stretch h-16 lg:h-20">
         <a
           href="#inicio"
-          className="flex items-center group shrink-0"
+          className="flex items-center group shrink-0 lg:justify-self-start"
           aria-label="Dra. Lara Oliveira — voltar ao topo"
         >
           <LogoMark />
         </a>
 
-        <nav className="hidden lg:flex items-center gap-7" aria-label="Principal">
+        <nav className="hidden lg:flex items-center gap-7 lg:justify-self-center" aria-label="Principal">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -64,7 +64,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 lg:justify-self-end">
           <ThemeToggle />
           <a
             href={buildWaLink('navbar')}
