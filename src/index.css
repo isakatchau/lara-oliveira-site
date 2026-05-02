@@ -369,8 +369,8 @@ a, button {
     transform 520ms cubic-bezier(0.32, 0.72, 0.24, 1);
   background: radial-gradient(
     320px circle at var(--gx, -300px) var(--gy, -300px),
-    rgba(201, 169, 122, 0.22),
-    rgba(201, 169, 122, 0.06) 35%,
+    rgba(201, 169, 122, 0.176),
+    rgba(201, 169, 122, 0.048) 35%,
     transparent 65%
   );
   mix-blend-mode: screen;
@@ -383,8 +383,8 @@ a, button {
 [data-theme='light'] .cursor-glow {
   background: radial-gradient(
     320px circle at var(--gx, -300px) var(--gy, -300px),
-    rgba(139, 111, 63, 0.22),
-    rgba(139, 111, 63, 0.06) 35%,
+    rgba(139, 111, 63, 0.176),
+    rgba(139, 111, 63, 0.048) 35%,
     transparent 65%
   );
   mix-blend-mode: multiply;
