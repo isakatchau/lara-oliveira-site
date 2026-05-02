@@ -119,21 +119,21 @@ function ProcCard({ proc, index }: { proc: Proc; index: number }) {
       rel="noopener noreferrer"
       onMouseMove={onMove}
       aria-label={`${cta} no WhatsApp`}
-      className="tilt-card flex flex-col group cursor-pointer h-full no-underline relative"
+      className="tilt-card flex flex-col group cursor-pointer h-full no-underline"
       style={{ background: 'var(--bg-card)', color: 'inherit', textDecoration: 'none' }}
-      // Scroll reveal handled by motion (replaces Reveal wrapper to avoid
-      // creating a parent stacking context that broke z-index ordering).
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      // Reveal: opacity-only. Animating `y` would leave an inline
+      // `transform: translateY(0)` after reveal, creating a per-card stacking
+      // context that broke z-index ordering between siblings.
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '0px 0px -80px 0px' }}
       transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.08 }}
-      // Hover: lift + scale + bring forward via z-index. Motion guarantees
-      // z-index updates immediately on enter and lingers during exit
-      // animation, so the hovered card always paints above its neighbors.
+      // Hover: animation handles transform/shadow only. z-index is owned by
+      // CSS (.tilt-card:hover) so it applies immediately and reliably without
+      // racing motion's animation system.
       whileHover={{
         y: -10,
         scale: 1.025,
-        zIndex: 50,
         boxShadow:
           '0 0 80px -10px rgba(201, 169, 122, 0.40), 0 36px 80px -22px rgba(0, 0, 0, 0.70)',
         transition: { duration: 0.36, ease: [0.22, 0.61, 0.36, 1] },

@@ -212,17 +212,12 @@ a, button {
   transition: opacity 320ms ease;
   z-index: 3;
 }
-.tilt-card:hover {
-  z-index: 50;
-  transform: translateY(-10px) scale(1.025);
-  transition:
-    transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 420ms ease,
-    z-index 0ms;
-  box-shadow:
-    0 0 80px -10px rgba(201, 169, 122, 0.40),
-    0 36px 80px -22px rgba(0, 0, 0, 0.70);
-}
+/* Hover transform/shadow are driven by framer-motion (whileHover) so the
+   animation has motion-physics. z-index stays in CSS so it flips
+   instantaneously on enter and lingers during exit via the base transition
+   `z-index 0ms 480ms` (0 duration, 480ms delay) — this keeps the card on
+   top until the unscale completes. */
+.tilt-card:hover { z-index: 50; }
 .tilt-card:hover::before { opacity: 1; }
 [data-theme='light'] .tilt-card:hover {
   box-shadow:
