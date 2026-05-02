@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
 import { asset } from '../lib/asset';
-import { useCursorGlow } from '../hooks/useCursorGlow';
 import Reveal from './Reveal';
 
 const PROCEDIMENTOS = [
@@ -98,15 +97,13 @@ function ProcCard({
   waCtx,
   cta,
 }: (typeof PROCEDIMENTOS)[0]) {
-  const onMove = useCursorGlow<HTMLAnchorElement>();
   return (
     <a
       href={buildWaLink(waCtx)}
       target="_blank"
       rel="noopener noreferrer"
-      onMouseMove={onMove}
       aria-label={`${cta} no WhatsApp`}
-      className="flex flex-col group cursor-pointer tilt-card cta-magnetic h-full no-underline"
+      className="flex flex-col group cursor-pointer tilt-card h-full no-underline"
       style={{ background: 'var(--bg-card)', border: '1px solid transparent', color: 'inherit', textDecoration: 'none' }}
     >
       <div className="relative overflow-hidden" style={{ height: '200px' }}>
