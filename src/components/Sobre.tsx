@@ -1,5 +1,5 @@
 import { Stethoscope, ClipboardList, Repeat } from 'lucide-react';
-import { asset } from '../lib/asset';
+import Picture from './Picture';
 import Reveal from './Reveal';
 
 const PILLARS = [
@@ -27,12 +27,12 @@ export default function Sobre() {
         <div className="grid lg:grid-cols-2">
 
           <Reveal className="relative overflow-hidden" style={{ minHeight: '480px' }}>
-            <img
-              src={asset('images/doc-trabalhando-2.png')}
-              alt="Dra. Lara Oliveira no consultório"
+            <Picture
+              base="doc-trabalhando-1"
+              alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
               className="w-full h-full object-cover"
-              style={{ minHeight: '480px', objectPosition: 'center' }}
-              loading="lazy"
+              style={{ minHeight: '480px', objectPosition: 'center 20%' }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div
               className="absolute inset-0 pointer-events-none hidden lg:block"

@@ -43,16 +43,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-5 lg:px-10 flex items-center justify-between h-16 lg:h-20">
         <a
           href="#inicio"
-          className="flex items-center gap-2.5 group shrink-0"
+          className="flex items-center group shrink-0"
           aria-label="Dra. Lara Oliveira — voltar ao topo"
         >
           <LogoMark />
-          <p
-            className="font-light tracking-[0.18em] text-[11px] sm:text-xs uppercase whitespace-nowrap"
-            style={{ color: 'var(--text-1)' }}
-          >
-            Dra. Lara Oliveira
-          </p>
         </a>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Principal">

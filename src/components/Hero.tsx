@@ -1,6 +1,6 @@
 import { MapPin, Clock } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
-import { asset } from '../lib/asset';
+import Picture from './Picture';
 import Reveal from './Reveal';
 
 export default function Hero() {
@@ -120,14 +120,18 @@ export default function Hero() {
                 }}
                 aria-hidden="true"
               />
-              <img
-                src={asset('images/doc-trabalhando-1.png')}
-                alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
-                className="relative z-10 w-full h-full object-cover"
-                style={{ objectPosition: 'center 20%' }}
-                fetchPriority="high"
-                loading="eager"
-              />
+              <div className="relative z-10 w-full h-full">
+                <Picture
+                  base="lara"
+                  widths={[640]}
+                  alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center top' }}
+                  loading="eager"
+                  fetchPriority="high"
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                />
+              </div>
               <div
                 className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
                 style={{ background: 'var(--fade-to-bg)' }}

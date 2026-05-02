@@ -87,8 +87,8 @@ export default function Localizacao() {
               src="https://maps.google.com/maps?q=R.+Conselheiro+Antônio+Prado,+37,+Jardim+Glória,+Olímpia+SP&output=embed"
               width="100%"
               height="100%"
-              className="absolute inset-0 w-full h-full"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.3) brightness(0.85)' }}
+              className="absolute inset-0 w-full h-full themed-map"
+              style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
