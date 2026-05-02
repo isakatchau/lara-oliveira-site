@@ -355,15 +355,18 @@ a, button {
 
 /* Global cursor spotlight that follows the mouse around the whole viewport.
    Lowered z-index so opaque content surfaces (cards, sections) sit above it
-   and the glow only shines through their borders/gaps. Cards bring their own
-   internal illumination via .tilt-card.cta-magnetic::before. */
+   and the glow only shines through their borders/gaps. */
 .cursor-glow {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 220ms ease;
+  transform: scale(0.92);
+  transform-origin: var(--gx, 50%) var(--gy, 50%);
+  transition:
+    opacity 520ms cubic-bezier(0.32, 0.72, 0.24, 1),
+    transform 520ms cubic-bezier(0.32, 0.72, 0.24, 1);
   background: radial-gradient(
     320px circle at var(--gx, -300px) var(--gy, -300px),
     rgba(201, 169, 122, 0.22),
@@ -371,6 +374,11 @@ a, button {
     transparent 65%
   );
   mix-blend-mode: screen;
+  will-change: opacity, transform;
+}
+.cursor-glow[data-visible='true'] {
+  opacity: 1;
+  transform: scale(1);
 }
 [data-theme='light'] .cursor-glow {
   background: radial-gradient(

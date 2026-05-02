@@ -77,7 +77,7 @@ export default function Localizacao() {
             </Reveal>
           </div>
 
-          <Reveal delay={120} className="relative overflow-hidden" style={{ minHeight: '380px' }}>
+          <Reveal delay={120} className="relative overflow-hidden" style={{ minHeight: '380px' }} data-glow-hide>
             <iframe
               title="Mapa do consultório da Dra. Lara Oliveira em Olímpia/SP"
               src="https://maps.google.com/maps?q=R.+Conselheiro+Antônio+Prado,+37,+Jardim+Glória,+Olímpia+SP&output=embed"

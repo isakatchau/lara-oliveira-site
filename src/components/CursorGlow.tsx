@@ -19,11 +19,18 @@ export default function CursorGlow() {
 
     let lastX = -9999;
     let lastY = -9999;
+    let insideHideZone = false;
     let visible = false;
 
+    const setVisible = (next: boolean) => {
+      if (next === visible) return;
+      visible = next;
+      if (visible) layer.setAttribute('data-visible', 'true');
+      else layer.removeAttribute('data-visible');
+    };
+
     // animationiteration bubbles up from the shimmer ::after on each cycle.
-    // We use it to remove .cta-near *after* the current cycle finishes,
-    // so the shimmer never freezes mid-pass when the cursor leaves.
+    // Used to delay removal of .cta-near until cycle finishes.
     const onIter = (e: Event) => {
       const target = e.currentTarget as HTMLElement;
       if (target.getAttribute(PENDING_ATTR) === '1') {
@@ -39,30 +46,26 @@ export default function CursorGlow() {
       }
     };
 
+    const isInsideAnyCard = () => {
+      const cards = document.querySelectorAll<HTMLElement>('.tilt-card');
+      for (const c of cards) {
+        const r = c.getBoundingClientRect();
+        if (lastX >= r.left && lastX <= r.right && lastY >= r.top && lastY <= r.bottom) {
+          return true;
+        }
+      }
+      return false;
+    };
+
     const tick = () => {
       rafRef.current = null;
       layer.style.setProperty('--gx', `${lastX}px`);
       layer.style.setProperty('--gy', `${lastY}px`);
 
-      // Hide the global glow when the cursor enters any card region — each
-      // card brings its own directional border glow, and the global blob
-      // washing over the card looks bad.
-      let insideCard = false;
-      const cards = document.querySelectorAll<HTMLElement>('.tilt-card');
-      for (const c of cards) {
-        const r = c.getBoundingClientRect();
-        if (lastX >= r.left && lastX <= r.right && lastY >= r.top && lastY <= r.bottom) {
-          insideCard = true;
-          break;
-        }
-      }
-      const shouldShow = !insideCard && lastX > -1000;
-      if (shouldShow !== visible) {
-        visible = shouldShow;
-        layer.style.opacity = visible ? '1' : '0';
-      }
+      const shouldShow = !insideHideZone && !isInsideAnyCard() && lastX > -1000;
+      setVisible(shouldShow);
 
-      // CTA proximity (shimmer activation)
+      // CTA proximity (shimmer activation with completion-aware removal)
       const ctas = document.querySelectorAll<HTMLElement>('[data-cta-near]');
       ctas.forEach((cta) => {
         ensureListener(cta);
@@ -81,16 +84,39 @@ export default function CursorGlow() {
       });
     };
 
+    const scheduleTick = () => {
+      if (rafRef.current == null) rafRef.current = requestAnimationFrame(tick);
+    };
+
     const onMove = (e: MouseEvent) => {
       lastX = e.clientX;
       lastY = e.clientY;
-      if (rafRef.current == null) rafRef.current = requestAnimationFrame(tick);
+      scheduleTick();
     };
     const onLeave = () => {
       lastX = -9999;
       lastY = -9999;
-      if (rafRef.current == null) rafRef.current = requestAnimationFrame(tick);
+      scheduleTick();
     };
+
+    // Some surfaces (Google Maps iframe, etc.) swallow mousemove from the
+    // parent document, so the rAF tick can't naturally detect "cursor is
+    // here". For those zones we explicitly toggle the hide flag using
+    // mouseenter/mouseleave on the wrapper element.
+    const hideZoneEnter = () => {
+      insideHideZone = true;
+      scheduleTick();
+    };
+    const hideZoneLeave = () => {
+      insideHideZone = false;
+      scheduleTick();
+    };
+
+    const hideZones = document.querySelectorAll<HTMLElement>('[data-glow-hide]');
+    hideZones.forEach((z) => {
+      z.addEventListener('mouseenter', hideZoneEnter);
+      z.addEventListener('mouseleave', hideZoneLeave);
+    });
 
     window.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('mouseleave', onLeave);
@@ -98,6 +124,10 @@ export default function CursorGlow() {
     return () => {
       window.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseleave', onLeave);
+      hideZones.forEach((z) => {
+        z.removeEventListener('mouseenter', hideZoneEnter);
+        z.removeEventListener('mouseleave', hideZoneLeave);
+      });
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
       document.querySelectorAll<HTMLElement>('[data-cta-near]').forEach((cta) => {
         cta.removeEventListener('animationiteration', onIter);
