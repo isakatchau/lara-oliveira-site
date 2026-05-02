@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const PROXIMITY = 180; // px from CTA bounding box to "activate"
+const PROXIMITY = 180; // px from CTA bbox to "activate"
 const NEAR_CLASS = 'cta-near';
 const PENDING_ATTR = 'data-cta-pending-clear';
 
@@ -16,14 +16,14 @@ export default function CursorGlow() {
 
     const layer = layerRef.current;
     if (!layer) return;
-    layer.style.opacity = '1';
 
     let lastX = -9999;
     let lastY = -9999;
+    let visible = false;
 
-    // Bubbles up from the ::after pseudo when each shimmer cycle completes.
-    // We use it to remove .cta-near *only* after the current cycle finishes,
-    // so the shimmer never freezes mid-pass.
+    // animationiteration bubbles up from the shimmer ::after on each cycle.
+    // We use it to remove .cta-near *after* the current cycle finishes,
+    // so the shimmer never freezes mid-pass when the cursor leaves.
     const onIter = (e: Event) => {
       const target = e.currentTarget as HTMLElement;
       if (target.getAttribute(PENDING_ATTR) === '1') {
@@ -31,7 +31,6 @@ export default function CursorGlow() {
         target.removeAttribute(PENDING_ATTR);
       }
     };
-
     const attached = new WeakSet<Element>();
     const ensureListener = (cta: HTMLElement) => {
       if (!attached.has(cta)) {
@@ -45,6 +44,25 @@ export default function CursorGlow() {
       layer.style.setProperty('--gx', `${lastX}px`);
       layer.style.setProperty('--gy', `${lastY}px`);
 
+      // Hide the global glow when the cursor enters any card region — each
+      // card brings its own directional border glow, and the global blob
+      // washing over the card looks bad.
+      let insideCard = false;
+      const cards = document.querySelectorAll<HTMLElement>('.tilt-card');
+      for (const c of cards) {
+        const r = c.getBoundingClientRect();
+        if (lastX >= r.left && lastX <= r.right && lastY >= r.top && lastY <= r.bottom) {
+          insideCard = true;
+          break;
+        }
+      }
+      const shouldShow = !insideCard && lastX > -1000;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        layer.style.opacity = visible ? '1' : '0';
+      }
+
+      // CTA proximity (shimmer activation)
       const ctas = document.querySelectorAll<HTMLElement>('[data-cta-near]');
       ctas.forEach((cta) => {
         ensureListener(cta);
@@ -55,11 +73,9 @@ export default function CursorGlow() {
         const isNear = d < PROXIMITY;
 
         if (isNear) {
-          // Cursor approached: cancel any pending clear and keep shimmer on.
           if (!cta.classList.contains(NEAR_CLASS)) cta.classList.add(NEAR_CLASS);
           if (cta.hasAttribute(PENDING_ATTR)) cta.removeAttribute(PENDING_ATTR);
         } else if (cta.classList.contains(NEAR_CLASS)) {
-          // Cursor left: do NOT remove now — let current shimmer cycle finish.
           if (!cta.hasAttribute(PENDING_ATTR)) cta.setAttribute(PENDING_ATTR, '1');
         }
       });

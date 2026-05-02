@@ -1,59 +1,76 @@
+import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
-import { asset } from '../lib/asset';
+import { useCursorGlow } from '../hooks/useCursorGlow';
+import {
+  BotoxArt,
+  PreenchimentoArt,
+  HarmonizacaoArt,
+  ComplementaresArt,
+} from './ProcArt';
 import Reveal from './Reveal';
 
-const PROCEDIMENTOS = [
+type Proc = {
+  id: string;
+  title: string;
+  subtitle: string;
+  art: ReactNode;
+  items: string[];
+  waCtx: 'botox' | 'preenchimento' | 'harmonizacao' | 'complementares';
+  cta: string;
+};
+
+const PROCEDIMENTOS: Proc[] = [
   {
     id: 'botox',
     title: 'Toxina botulínica',
     subtitle: 'Para linhas de expressão',
-    image: 'images/proc-botox.svg',
+    art: <BotoxArt className="w-full h-full" />,
     items: [
       'Aplicação na testa, glabela e pés-de-galinha',
       'Sessão de 15 a 30 minutos. Efeito começa em 3 a 7 dias',
       'Duração média de 4 a 6 meses, varia conforme metabolismo',
     ],
-    waCtx: 'botox' as const,
+    waCtx: 'botox',
     cta: 'Tirar dúvida sobre botox',
   },
   {
     id: 'preenchimento',
     title: 'Preenchimento facial',
     subtitle: 'Ácido hialurônico',
-    image: 'images/proc-preenchimento.svg',
+    art: <PreenchimentoArt className="w-full h-full" />,
     items: [
       'Malar, lábios, mandíbula, olheira, sulco nasogeniano',
       'Resultado fica visível na hora da aplicação',
       'Reverte com hialuronidase se você não gostar',
     ],
-    waCtx: 'preenchimento' as const,
+    waCtx: 'preenchimento',
     cta: 'Tirar dúvida sobre preenchimento',
   },
   {
     id: 'harmonizacao',
     title: 'Harmonização facial',
     subtitle: 'Vários procedimentos no mesmo plano',
-    image: 'images/proc-harmonizacao.svg',
+    art: <HarmonizacaoArt className="w-full h-full" />,
     items: [
       'Avalio terço superior, médio e inferior antes de planejar',
       'Combina toxina, ácido hialurônico e bioestimulador conforme o caso',
       'Foco em proporção. Não troco seu rosto',
     ],
-    waCtx: 'harmonizacao' as const,
+    waCtx: 'harmonizacao',
     cta: 'Avaliar meu caso',
   },
   {
     id: 'complementares',
     title: 'Bioestimuladores e skinbooster',
     subtitle: 'Para qualidade da pele',
-    image: 'images/proc-complementares.svg',
+    art: <ComplementaresArt className="w-full h-full" />,
     items: [
       'Sculptra, Radiesse e Ellansé estimulam colágeno próprio',
       'Skinbooster faz hidratação profunda da derme',
       'Indicação depende de idade, biotipo e queixa específica',
     ],
-    waCtx: 'complementares' as const,
+    waCtx: 'complementares',
     cta: 'Ver se é meu caso',
   },
 ];
@@ -79,7 +96,10 @@ export default function Procedimentos() {
         </div>
 
         <Reveal delay={300}>
-          <p className="text-center font-light mt-10 max-w-xl mx-auto" style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}>
+          <p
+            className="text-center font-light mt-10 max-w-xl mx-auto"
+            style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}
+          >
             Resultados variam conforme avaliação individual. Toda conduta exige consulta médica prévia.
           </p>
         </Reveal>
@@ -89,34 +109,29 @@ export default function Procedimentos() {
   );
 }
 
-function ProcCard({
-  title,
-  subtitle,
-  image,
-  items,
-  waCtx,
-  cta,
-}: (typeof PROCEDIMENTOS)[0]) {
+function ProcCard({ title, subtitle, art, items, waCtx, cta }: Proc) {
+  const onMove = useCursorGlow<HTMLAnchorElement>();
   return (
     <a
       href={buildWaLink(waCtx)}
       target="_blank"
       rel="noopener noreferrer"
+      onMouseMove={onMove}
       aria-label={`${cta} no WhatsApp`}
       className="flex flex-col group cursor-pointer tilt-card h-full no-underline"
-      style={{ background: 'var(--bg-card)', border: '1px solid transparent', color: 'inherit', textDecoration: 'none' }}
+      style={{ background: 'var(--bg-card)', color: 'inherit', textDecoration: 'none' }}
     >
-      <div className="relative overflow-hidden" style={{ height: '200px' }}>
-        <img
-          src={asset(image)}
-          alt={title}
-          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, color-mix(in srgb, var(--bg-card) 85%, transparent) 0%, transparent 60%)' }}
-        />
+      <div
+        className="relative overflow-hidden"
+        style={{
+          height: '200px',
+          background:
+            'linear-gradient(180deg, color-mix(in srgb, var(--gold) 6%, var(--bg-card)) 0%, var(--bg-card) 100%)',
+        }}
+      >
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+          {art}
+        </div>
       </div>
 
       <div className="flex flex-col gap-3 p-5 sm:p-6 flex-1">
