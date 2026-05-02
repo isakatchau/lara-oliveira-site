@@ -14,15 +14,15 @@ export default function Hero() {
         className="absolute inset-0 mesh-anim opacity-70 pointer-events-none"
         style={{
           background:
-            'radial-gradient(closest-side at 22% 32%, rgba(201,169,122,0.18), transparent 60%), radial-gradient(closest-side at 78% 72%, rgba(201,169,122,0.10), transparent 65%)',
+            'radial-gradient(closest-side at 22% 32%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 60%), radial-gradient(closest-side at 78% 72%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 65%)',
         }}
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(#C9A97A 1px, transparent 1px), linear-gradient(90deg, #C9A97A 1px, transparent 1px)',
+            'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
         }}
         aria-hidden="true"
@@ -44,7 +44,7 @@ export default function Hero() {
             <Reveal delay={80}>
               <h1
                 className="font-bold uppercase leading-[1.05]"
-                style={{ fontSize: 'clamp(1.85rem, 4.6vw, 3.2rem)', letterSpacing: '0.01em' }}
+                style={{ fontSize: 'clamp(1.85rem, 4.6vw, 3.2rem)', letterSpacing: '0.01em', color: 'var(--text-1)' }}
               >
                 Dermatologia em Olímpia
                 <br />
@@ -121,16 +121,16 @@ export default function Hero() {
                 aria-hidden="true"
               />
               <img
-                src={asset('images/lara-hero.svg')}
+                src={asset('images/doc-trabalhando-1.png')}
                 alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
-                className="relative z-10 w-full h-full object-cover object-center"
-                style={{ objectPosition: 'center top' }}
+                className="relative z-10 w-full h-full object-cover"
+                style={{ objectPosition: 'center 20%' }}
                 fetchPriority="high"
                 loading="eager"
               />
               <div
                 className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
-                style={{ background: 'linear-gradient(to top, var(--bg-1), transparent)' }}
+                style={{ background: 'var(--fade-to-bg)' }}
               />
             </div>
           </Reveal>

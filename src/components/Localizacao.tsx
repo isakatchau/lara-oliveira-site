@@ -7,10 +7,7 @@ const MAPS_LINK = 'https://maps.google.com/?q=R.+Conselheiro+Antônio+Prado,+37,
 
 export default function Localizacao() {
   return (
-    <section
-      id="contato"
-      style={{ background: 'var(--bg-2)', borderTop: '1px solid var(--line)' }}
-    >
+    <section id="contato" style={{ background: 'var(--bg-2)', borderTop: '1px solid var(--line)' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2">
 
@@ -24,15 +21,12 @@ export default function Localizacao() {
 
             <Reveal delay={80}>
               <div>
-                <p
-                  className="uppercase tracking-[0.3em] font-light mb-2"
-                  style={{ color: 'var(--gold)', fontSize: '0.7rem' }}
-                >
+                <p className="uppercase tracking-[0.3em] font-light mb-2" style={{ color: 'var(--gold)', fontSize: '0.7rem' }}>
                   Onde te atendo
                 </p>
                 <h2
                   className="font-bold uppercase tracking-[0.16em]"
-                  style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)' }}
+                  style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)', color: 'var(--text-1)' }}
                 >
                   Consultório em Olímpia
                 </h2>
@@ -45,7 +39,7 @@ export default function Localizacao() {
 
             <Reveal delay={140}>
               <div className="flex flex-col gap-2">
-                <p className="font-medium" style={{ color: '#FFFFFF', fontSize: '0.95rem' }}>
+                <p className="font-medium" style={{ color: 'var(--text-1)', fontSize: '0.95rem' }}>
                   R. Conselheiro Antônio Prado, 37
                 </p>
                 <p className="font-light" style={{ color: 'var(--text-2)', fontSize: '0.88rem' }}>
@@ -67,7 +61,7 @@ export default function Localizacao() {
                   style={{ border: '1px solid var(--gold)', color: 'var(--gold)' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = 'var(--gold)';
-                    e.currentTarget.style.color = '#0A0A0A';
+                    e.currentTarget.style.color = 'var(--text-on-gold)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent';
@@ -105,7 +99,7 @@ export default function Localizacao() {
 
       <div
         className="relative overflow-hidden py-16 lg:py-20 text-center"
-        style={{ background: '#090909', borderTop: '1px solid var(--line)' }}
+        style={{ background: 'var(--bg-deep)', borderTop: '1px solid var(--line)' }}
       >
         <div
           className="absolute inset-0 opacity-[0.4]"
@@ -116,21 +110,18 @@ export default function Localizacao() {
           }}
           aria-hidden="true"
         />
-        <div className="absolute inset-0" style={{ background: 'rgba(10,10,10,0.78)' }} aria-hidden="true" />
+        <div className="absolute inset-0" style={{ background: 'var(--bg-overlay-mid)' }} aria-hidden="true" />
 
         <div className="relative z-10 max-w-2xl mx-auto px-6 flex flex-col items-center gap-5">
           <Reveal>
-            <p
-              className="uppercase tracking-[0.3em] font-light"
-              style={{ color: 'var(--gold)', fontSize: '0.68rem' }}
-            >
+            <p className="uppercase tracking-[0.3em] font-light" style={{ color: 'var(--gold)', fontSize: '0.68rem' }}>
               Antes de marcar
             </p>
           </Reveal>
           <Reveal delay={80}>
             <h2
               className="font-bold uppercase text-center"
-              style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', letterSpacing: '0.04em', lineHeight: 1.25 }}
+              style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)', letterSpacing: '0.04em', lineHeight: 1.25, color: 'var(--text-1)' }}
             >
               Tem alguma queixa?
               <br />
@@ -138,10 +129,7 @@ export default function Localizacao() {
             </h2>
           </Reveal>
           <Reveal delay={140}>
-            <p
-              className="font-light max-w-md leading-relaxed"
-              style={{ color: 'var(--text-2)', fontSize: '0.9rem' }}
-            >
+            <p className="font-light max-w-md leading-relaxed" style={{ color: 'var(--text-2)', fontSize: '0.9rem' }}>
               Quem responde sou eu. Pode mandar foto da queixa que eu te oriento se vale a pena
               marcar uma consulta presencial.
             </p>
@@ -172,13 +160,13 @@ export default function Localizacao() {
 function LogoMark() {
   return (
     <div className="flex flex-col items-start gap-1">
-      <svg width="48" height="40" viewBox="0 0 52 44" fill="none" aria-hidden="true">
-        <line x1="10" y1="4" x2="10" y2="34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="10" y1="34" x2="24" y2="34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="38" cy="20" r="13" stroke="white" strokeWidth="1.5" fill="none" />
-        <line x1="22" y1="34" x2="52" y2="34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <svg width="48" height="40" viewBox="0 0 52 44" fill="none" aria-hidden="true" style={{ color: 'var(--text-1)' }}>
+        <line x1="10" y1="4" x2="10" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="10" y1="34" x2="24" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="38" cy="20" r="13" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        <line x1="22" y1="34" x2="52" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
-      <p className="uppercase tracking-[0.3em] font-light" style={{ color: '#FFFFFF', fontSize: '0.78rem' }}>
+      <p className="uppercase tracking-[0.3em] font-light" style={{ color: 'var(--text-1)', fontSize: '0.78rem' }}>
         Lara Oliveira
       </p>
       <p className="uppercase tracking-[0.4em] font-light" style={{ color: 'var(--gold)', fontSize: '0.55rem' }}>

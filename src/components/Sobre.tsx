@@ -28,15 +28,15 @@ export default function Sobre() {
 
           <Reveal className="relative overflow-hidden" style={{ minHeight: '480px' }}>
             <img
-              src={asset('images/lara-sobre.svg')}
-              alt="Consultório da Dra. Lara Oliveira"
-              className="w-full h-full object-cover object-center"
-              style={{ minHeight: '480px' }}
+              src={asset('images/doc-trabalhando-2.png')}
+              alt="Dra. Lara Oliveira no consultório"
+              className="w-full h-full object-cover"
+              style={{ minHeight: '480px', objectPosition: 'center' }}
               loading="lazy"
             />
             <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, transparent 70%, var(--bg-2))' }}
+              className="absolute inset-0 pointer-events-none hidden lg:block"
+              style={{ background: 'var(--fade-side-to-bg)' }}
             />
           </Reveal>
 
@@ -51,7 +51,7 @@ export default function Sobre() {
               </p>
               <h2
                 className="font-bold uppercase"
-                style={{ fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', letterSpacing: '0.04em', lineHeight: 1.15 }}
+                style={{ fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', letterSpacing: '0.04em', lineHeight: 1.15, color: 'var(--text-1)' }}
               >
                 Dra. Lara Oliveira
               </h2>
@@ -60,25 +60,16 @@ export default function Sobre() {
 
             <Reveal delay={120}>
               <div className="flex flex-col gap-4">
-                <p
-                  className="font-light leading-relaxed"
-                  style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
-                >
+                <p className="font-light leading-relaxed" style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}>
                   Sou médica com especialização em dermatologia clínica e estética e formação em
                   tricologia. Atendo pelo CRM 200235 no consultório do Jardim Glória, em Olímpia.
                 </p>
-                <p
-                  className="font-light leading-relaxed"
-                  style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
-                >
+                <p className="font-light leading-relaxed" style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}>
                   Faço o atendimento sozinha. Sem assistente passando triagem, sem balcão de
                   vendas. Você marca, eu te examino, te mostro o que cada técnica realmente faz,
                   quanto dura, quanto custa, e você decide na sua hora se quer marcar.
                 </p>
-                <p
-                  className="font-light leading-relaxed"
-                  style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
-                >
+                <p className="font-light leading-relaxed" style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}>
                   Se você não precisa de procedimento, eu falo. Se precisa de algo que eu não
                   faço, eu indico colega de confiança da minha rede.
                 </p>
@@ -93,14 +84,11 @@ export default function Sobre() {
                     <div>
                       <p
                         className="uppercase tracking-widest font-semibold leading-tight mb-1.5"
-                        style={{ color: '#FFFFFF', fontSize: '0.65rem' }}
+                        style={{ color: 'var(--text-1)', fontSize: '0.65rem' }}
                       >
                         {pillar.label}
                       </p>
-                      <p
-                        className="font-light leading-snug"
-                        style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}
-                      >
+                      <p className="font-light leading-snug" style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}>
                         {pillar.desc}
                       </p>
                     </div>

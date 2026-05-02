@@ -48,10 +48,7 @@ export default function Depoimentos() {
         </div>
 
         <Reveal delay={300}>
-          <p
-            className="text-center font-light mt-10 max-w-xl mx-auto"
-            style={{ color: 'var(--text-3)', fontSize: '0.72rem' }}
-          >
+          <p className="text-center font-light mt-10 max-w-xl mx-auto" style={{ color: 'var(--text-3)', fontSize: '0.72rem' }}>
             Depoimentos coletados com consentimento. Resultados variam conforme avaliação individual.
           </p>
         </Reveal>
@@ -73,10 +70,7 @@ function DepoCard({
   return (
     <div
       className="flex flex-col gap-5 p-6 sm:p-7 relative h-full tilt-card"
-      style={{
-        background: '#0E0E0E',
-        border: '1px solid var(--line)',
-      }}
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--line)' }}
     >
       <span
         className="absolute"
@@ -96,38 +90,29 @@ function DepoCard({
 
       <div className="flex gap-1 mt-3" aria-label={`${stars} de 5 estrelas`}>
         {Array.from({ length: stars }).map((_, i) => (
-          <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true">
+          <svg key={i} width="12" height="12" viewBox="0 0 24 24" style={{ fill: 'var(--gold)' }} aria-hidden="true">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
           </svg>
         ))}
       </div>
 
-      <p
-        className="font-light leading-relaxed flex-1"
-        style={{ color: 'var(--text-2)', fontSize: '0.86rem' }}
-      >
+      <p className="font-light leading-relaxed flex-1" style={{ color: 'var(--text-2)', fontSize: '0.86rem' }}>
         {quote}
       </p>
 
       <div className="flex items-center gap-3 pt-4" style={{ borderTop: '1px solid var(--line)' }}>
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold uppercase"
-          style={{ background: 'rgba(201,169,122,0.15)', color: 'var(--gold)' }}
+          style={{ background: 'color-mix(in srgb, var(--gold) 18%, transparent)', color: 'var(--gold)' }}
           aria-hidden="true"
         >
           {initial}
         </div>
         <div>
-          <p
-            className="font-medium uppercase tracking-widest"
-            style={{ color: '#FFFFFF', fontSize: '0.72rem' }}
-          >
+          <p className="font-medium uppercase tracking-widest" style={{ color: 'var(--text-1)', fontSize: '0.72rem' }}>
             {name} · {age}
           </p>
-          <p
-            className="font-light"
-            style={{ color: 'var(--text-3)', fontSize: '0.68rem' }}
-          >
+          <p className="font-light" style={{ color: 'var(--text-3)', fontSize: '0.68rem' }}>
             {procedimento} · {tempo}
           </p>
         </div>
@@ -141,7 +126,7 @@ function SectionHeader({ title }: { title: string }) {
     <div className="text-center">
       <h2
         className="font-bold uppercase tracking-[0.18em]"
-        style={{ fontSize: 'clamp(1.3rem, 2.6vw, 1.8rem)' }}
+        style={{ fontSize: 'clamp(1.3rem, 2.6vw, 1.8rem)', color: 'var(--text-1)' }}
       >
         {title}
       </h2>

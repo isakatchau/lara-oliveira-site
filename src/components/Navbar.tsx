@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'Sobre', href: '#sobre' },
@@ -33,7 +34,7 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? 'rgba(10,10,10,0.94)' : 'rgba(10,10,10,0.55)',
+        background: scrolled ? 'var(--bg-overlay-strong)' : 'var(--bg-overlay-soft)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
@@ -46,7 +47,10 @@ export default function Navbar() {
           aria-label="Dra. Lara Oliveira — voltar ao topo"
         >
           <LogoMark />
-          <p className="text-white font-light tracking-[0.18em] text-[11px] sm:text-xs uppercase whitespace-nowrap">
+          <p
+            className="font-light tracking-[0.18em] text-[11px] sm:text-xs uppercase whitespace-nowrap"
+            style={{ color: 'var(--text-1)' }}
+          >
             Dra. Lara Oliveira
           </p>
         </a>
@@ -56,49 +60,58 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-200 hover:text-[var(--gold)]"
+              className="text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-200"
               style={{ color: 'var(--text-3)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-3)')}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <a
-          href={buildWaLink('navbar')}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden lg:inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold px-4 py-2.5 cta-gold whitespace-nowrap"
-          style={{
-            border: '1px solid var(--gold)',
-            color: 'var(--gold)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--gold)';
-            e.currentTarget.style.color = '#0A0A0A';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.color = 'var(--gold)';
-          }}
-        >
-          WhatsApp
-        </a>
+        <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
+          <a
+            href={buildWaLink('navbar')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold px-4 py-2.5 cta-gold whitespace-nowrap"
+            style={{
+              border: '1px solid var(--gold)',
+              color: 'var(--gold)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--gold)';
+              e.currentTarget.style.color = 'var(--text-on-gold)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--gold)';
+            }}
+          >
+            WhatsApp
+          </a>
+        </div>
 
-        <button
-          className="lg:hidden text-white p-2 -mr-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="p-2 -mr-2"
+            style={{ color: 'var(--text-1)' }}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (
         <div
           className="lg:hidden px-6 pb-6 pt-2 flex flex-col gap-3"
-          style={{ background: 'rgba(10,10,10,0.98)' }}
+          style={{ background: 'var(--bg-overlay-strong)' }}
         >
           {NAV_LINKS.map((link) => (
             <a
@@ -116,7 +129,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs tracking-widest uppercase font-semibold px-5 py-3 text-center mt-2"
-            style={{ background: 'var(--gold)', color: '#0A0A0A' }}
+            style={{ background: 'var(--gold)', color: 'var(--text-on-gold)' }}
             onClick={() => setMenuOpen(false)}
           >
             Falar no WhatsApp
@@ -129,11 +142,19 @@ export default function Navbar() {
 
 function LogoMark() {
   return (
-    <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="8" y1="4" x2="8" y2="28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="8" y1="28" x2="20" y2="28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="28" cy="16" r="11" stroke="white" strokeWidth="1.5" fill="none" />
-      <line x1="17" y1="28" x2="39" y2="28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      style={{ color: 'var(--text-1)' }}
+    >
+      <line x1="8" y1="4" x2="8" y2="28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="8" y1="28" x2="20" y2="28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="28" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      <line x1="17" y1="28" x2="39" y2="28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }

@@ -79,10 +79,7 @@ export default function Procedimentos() {
         </div>
 
         <Reveal delay={300}>
-          <p
-            className="text-center font-light mt-10 max-w-xl mx-auto"
-            style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}
-          >
+          <p className="text-center font-light mt-10 max-w-xl mx-auto" style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}>
             Resultados variam conforme avaliação individual. Toda conduta exige consulta médica prévia.
           </p>
         </Reveal>
@@ -103,7 +100,7 @@ function ProcCard({
   return (
     <div
       className="flex flex-col group cursor-default tilt-card h-full"
-      style={{ background: '#0E0E0E', border: '1px solid transparent' }}
+      style={{ background: 'var(--bg-card)', border: '1px solid transparent' }}
     >
       <div className="relative overflow-hidden" style={{ height: '200px' }}>
         <img
@@ -114,22 +111,16 @@ function ProcCard({
         />
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 60%)' }}
+          style={{ background: 'linear-gradient(to top, color-mix(in srgb, var(--bg-card) 85%, transparent) 0%, transparent 60%)' }}
         />
       </div>
 
       <div className="flex flex-col gap-3 p-5 sm:p-6 flex-1">
         <div>
-          <h3
-            className="font-bold uppercase tracking-wide"
-            style={{ fontSize: '0.9rem', color: '#FFFFFF' }}
-          >
+          <h3 className="font-bold uppercase tracking-wide" style={{ fontSize: '0.9rem', color: 'var(--text-1)' }}>
             {title}
           </h3>
-          <p
-            className="uppercase tracking-widest font-light mt-1"
-            style={{ fontSize: '0.65rem', color: 'var(--gold)' }}
-          >
+          <p className="uppercase tracking-widest font-light mt-1" style={{ fontSize: '0.65rem', color: 'var(--gold)' }}>
             {subtitle}
           </p>
         </div>
@@ -151,8 +142,10 @@ function ProcCard({
           href={buildWaLink(waCtx)}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 uppercase tracking-widest font-semibold transition-colors duration-200 mt-3 hover:text-white"
+          className="flex items-center gap-1.5 uppercase tracking-widest font-semibold transition-colors duration-200 mt-3"
           style={{ color: 'var(--gold)', fontSize: '0.65rem' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-1)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--gold)')}
         >
           {cta} <ArrowRight size={12} aria-hidden="true" />
         </a>
@@ -166,7 +159,7 @@ function SectionHeader({ title }: { title: string }) {
     <div className="text-center">
       <h2
         className="font-bold uppercase tracking-[0.18em]"
-        style={{ fontSize: 'clamp(1.3rem, 2.6vw, 1.8rem)', color: '#FFFFFF' }}
+        style={{ fontSize: 'clamp(1.3rem, 2.6vw, 1.8rem)', color: 'var(--text-1)' }}
       >
         {title}
       </h2>
