@@ -9,21 +9,45 @@ function getInitialTheme(): Theme {
   return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
 }
 
+type ViewTransitionDoc = Document & {
+  startViewTransition?: (cb: () => void) => unknown;
+};
+
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   const applyTheme = useCallback((next: Theme) => {
-    if (next === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
+    const swap = () => {
+      if (next === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        /* ignore storage failures */
+      }
+      setThemeState(next);
+    };
+
+    const doc = document as ViewTransitionDoc;
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (typeof doc.startViewTransition === 'function' && !reduced) {
+      // Native cross-fade across the whole document.
+      doc.startViewTransition(swap);
+      return;
     }
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* ignore storage failures */
-    }
-    setThemeState(next);
+
+    // Fallback: temporarily enable a global color transition class so older
+    // browsers still get a smooth fade across all surfaces.
+    const root = document.documentElement;
+    root.classList.add('theme-transition');
+    swap();
+    window.setTimeout(() => root.classList.remove('theme-transition'), 460);
   }, []);
 
   const toggle = useCallback(() => {

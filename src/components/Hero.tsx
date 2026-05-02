@@ -1,11 +1,9 @@
 import { MapPin, Clock } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
-import { useCursorGlow } from '../hooks/useCursorGlow';
 import Picture from './Picture';
 import Reveal from './Reveal';
 
 export default function Hero() {
-  const onMove = useCursorGlow<HTMLAnchorElement>();
 
   return (
     <section
@@ -77,12 +75,11 @@ export default function Hero() {
             <Reveal delay={260}>
               <div className="flex flex-col gap-3">
                 <a
+                  data-cta-near
                   href={buildWaLink('hero')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onMouseMove={onMove}
-                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-7 py-4 self-start cta-magnetic cta-magnetic-green"
-                  style={{ background: '#25D366', color: '#fff' }}
+                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-8 py-4 self-start cta-shine cta-solid-gold"
                 >
                   <WhatsAppIcon />
                   Marcar minha avaliação

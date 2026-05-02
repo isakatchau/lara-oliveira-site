@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { buildWaLink } from '../lib/whatsapp';
-import { useCursorGlow } from '../hooks/useCursorGlow';
 
 export default function WhatsAppFloat() {
   const [visible, setVisible] = useState(false);
-  const onMove = useCursorGlow<HTMLAnchorElement>();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 320);
@@ -18,9 +16,8 @@ export default function WhatsAppFloat() {
       href={buildWaLink('float')}
       target="_blank"
       rel="noopener noreferrer"
-      onMouseMove={onMove}
       aria-label="Falar com a Dra. Lara no WhatsApp"
-      className="fixed z-[60] bottom-5 right-5 lg:bottom-7 lg:right-7 wpp-pulse cta-magnetic cta-magnetic-green"
+      className="fixed z-[60] bottom-5 right-5 lg:bottom-7 lg:right-7 wpp-pulse"
       style={{
         background: '#25D366',
         color: '#fff',
@@ -31,6 +28,13 @@ export default function WhatsAppFloat() {
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: '0 14px 30px -10px rgba(0,0,0,0.5)',
+        transition: 'transform 220ms ease, box-shadow 220ms ease',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'scale(1.08)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'scale(1)';
       }}
     >
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

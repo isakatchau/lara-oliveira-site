@@ -133,12 +133,11 @@ export default function Localizacao() {
           </Reveal>
           <Reveal delay={200}>
             <a
+              data-cta-near
               href={buildWaLink('footer')}
               target="_blank"
               rel="noopener noreferrer"
-              onMouseMove={onMove}
-              className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-8 py-4 cta-magnetic cta-magnetic-green mt-2"
-              style={{ background: '#25D366', color: '#fff' }}
+              className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-9 py-4 cta-shine cta-solid-gold mt-2"
             >
               <MessageCircle size={15} aria-hidden="true" />
               Falar com a Dra. Lara

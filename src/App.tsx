@@ -6,6 +6,7 @@ import Diferencial from './components/Diferencial';
 import Depoimentos from './components/Depoimentos';
 import Localizacao from './components/Localizacao';
 import WhatsAppFloat from './components/WhatsAppFloat';
+import CursorGlow from './components/CursorGlow';
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
       </footer>
 
       <WhatsAppFloat />
+      <CursorGlow />
     </>
   );
 }
