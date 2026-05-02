@@ -1,35 +1,37 @@
 import { MapPin, Clock } from 'lucide-react';
 import { buildWaLink } from '../lib/whatsapp';
+import { asset } from '../lib/asset';
 import Reveal from './Reveal';
 
 export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ background: 'var(--bg-1)' }}
+      className="relative flex items-center overflow-hidden"
+      style={{ background: 'var(--bg-1)', minHeight: '100vh' }}
     >
-      {/* Animated gradient mesh */}
       <div
         className="absolute inset-0 mesh-anim opacity-70 pointer-events-none"
         style={{
           background:
-            'radial-gradient(closest-side at 20% 30%, rgba(201,169,122,0.18), transparent 60%), radial-gradient(closest-side at 75% 70%, rgba(201,169,122,0.10), transparent 65%)',
+            'radial-gradient(closest-side at 22% 32%, rgba(201,169,122,0.18), transparent 60%), radial-gradient(closest-side at 78% 72%, rgba(201,169,122,0.10), transparent 65%)',
         }}
+        aria-hidden="true"
       />
-      {/* Subtle grid texture */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(#C9A97A 1px, transparent 1px), linear-gradient(90deg, #C9A97A 1px, transparent 1px)`,
+          backgroundImage:
+            'linear-gradient(#C9A97A 1px, transparent 1px), linear-gradient(90deg, #C9A97A 1px, transparent 1px)',
           backgroundSize: '64px 64px',
         }}
+        aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full pt-28 pb-16 lg:py-0 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full pt-32 pb-16 lg:pt-32 lg:pb-20 relative z-10">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
 
-          <div className="flex flex-col gap-7 lg:pr-8">
+          <div className="flex flex-col gap-7">
             <Reveal>
               <p
                 className="uppercase tracking-[0.32em] font-light"
@@ -42,13 +44,11 @@ export default function Hero() {
             <Reveal delay={80}>
               <h1
                 className="font-bold uppercase leading-[1.05]"
-                style={{ fontSize: 'clamp(2rem, 5vw, 3.6rem)', letterSpacing: '0.01em' }}
+                style={{ fontSize: 'clamp(1.85rem, 4.6vw, 3.2rem)', letterSpacing: '0.01em' }}
               >
-                Pele cuidada
+                Dermatologia em Olímpia
                 <br />
-                por médica.
-                <br />
-                <span style={{ color: 'var(--gold)' }}>Beleza que continua sua.</span>
+                <span style={{ color: 'var(--gold)' }}>com a Dra. Lara Oliveira</span>
               </h1>
             </Reveal>
 
@@ -56,16 +56,18 @@ export default function Hero() {
               <div
                 className="w-12 h-px"
                 style={{ background: 'linear-gradient(to right, var(--gold), transparent)' }}
+                aria-hidden="true"
               />
             </Reveal>
 
             <Reveal delay={200}>
               <p
                 className="font-light leading-relaxed max-w-md"
-                style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
+                style={{ color: 'var(--text-2)', fontSize: '0.98rem' }}
               >
-                Avaliação dermatológica completa antes de qualquer procedimento.
-                Você decide com informação — não com pressa.
+                Sou médica dermatologista (CRM 200235). Atendo no consultório do Jardim Glória,
+                com avaliação clínica antes de qualquer procedimento estético. Você marca, eu
+                te examino, te explico o que vejo, e a gente decide junto se vale fazer.
               </p>
             </Reveal>
 
@@ -75,18 +77,18 @@ export default function Hero() {
                   href={buildWaLink('hero')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-xs px-7 py-4 self-start cta-glow"
+                  className="inline-flex items-center gap-3 font-semibold uppercase tracking-widest text-[11px] sm:text-xs px-7 py-4 self-start cta-glow"
                   style={{ background: '#25D366', color: '#fff' }}
                 >
                   <WhatsAppIcon />
-                  Falar com a Dra. Lara no WhatsApp
+                  Falar comigo no WhatsApp
                 </a>
                 <p
                   className="flex items-center gap-2 font-light"
-                  style={{ color: 'var(--text-3)', fontSize: '0.72rem' }}
+                  style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}
                 >
                   <Clock size={11} aria-hidden="true" />
-                  Atende seg–sex, 9h–18h · Resposta no mesmo dia
+                  Respondo segunda a sexta, das 9h às 18h.
                 </p>
               </div>
             </Reveal>
@@ -102,22 +104,25 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <Reveal delay={120} className="relative flex items-end justify-center lg:justify-end h-full">
+          <Reveal
+            delay={120}
+            className="relative flex items-end justify-center lg:justify-end h-full order-first lg:order-last"
+          >
             <div
-              className="relative w-full max-w-md lg:max-w-full"
-              style={{ height: 'clamp(460px, 78vh, 660px)' }}
+              className="relative w-full max-w-sm sm:max-w-md lg:max-w-full mx-auto"
+              style={{ height: 'clamp(380px, 70vh, 620px)' }}
             >
               <div
-                className="absolute top-8 right-0 w-full h-full"
+                className="absolute top-6 right-0 w-full h-full"
                 style={{
                   border: '1px solid var(--line-strong)',
-                  transform: 'translate(14px, -14px)',
+                  transform: 'translate(10px, -10px)',
                 }}
                 aria-hidden="true"
               />
               <img
-                src="/images/lara-hero.svg"
-                alt="Retrato da Dra. Lara Oliveira, dermatologista, no consultório em Olímpia/SP"
+                src={asset('images/lara-hero.svg')}
+                alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
                 className="relative z-10 w-full h-full object-cover object-center"
                 style={{ objectPosition: 'center top' }}
                 fetchPriority="high"

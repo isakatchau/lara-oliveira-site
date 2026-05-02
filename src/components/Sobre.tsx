@@ -1,21 +1,22 @@
 import { Stethoscope, ClipboardList, Repeat } from 'lucide-react';
+import { asset } from '../lib/asset';
 import Reveal from './Reveal';
 
 const PILLARS = [
   {
     icon: <Stethoscope size={22} strokeWidth={1.5} aria-hidden="true" />,
-    label: 'Avaliação médica',
-    desc: 'Diagnóstico antes de procedimento.',
+    label: 'Avaliação clínica',
+    desc: 'Antes de propor estética eu examino sua pele para ver se tem algo que precisa de tratamento clínico primeiro.',
   },
   {
     icon: <ClipboardList size={22} strokeWidth={1.5} aria-hidden="true" />,
-    label: 'Plano por rosto',
-    desc: 'Sem protocolo padrão. Cada plano é desenhado para você.',
+    label: 'Plano por consulta',
+    desc: 'O que vamos fazer sai do que vimos juntas no consultório. Não trabalho com pacote pré-pronto.',
   },
   {
     icon: <Repeat size={22} strokeWidth={1.5} aria-hidden="true" />,
-    label: 'Acompanhamento',
-    desc: 'Retornos inclusos. Cuido do resultado, não só da aplicação.',
+    label: 'Retorno incluso',
+    desc: 'Toda aplicação tem retorno marcado em 14 a 30 dias para ajuste fino, sem custo extra.',
   },
 ];
 
@@ -25,12 +26,12 @@ export default function Sobre() {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2">
 
-          <Reveal className="relative overflow-hidden" style={{ minHeight: '560px' }}>
+          <Reveal className="relative overflow-hidden" style={{ minHeight: '480px' }}>
             <img
-              src="/images/lara-sobre.svg"
-              alt="Dra. Lara Oliveira no consultório"
+              src={asset('images/lara-sobre.svg')}
+              alt="Consultório da Dra. Lara Oliveira"
               className="w-full h-full object-cover object-center"
-              style={{ minHeight: '560px' }}
+              style={{ minHeight: '480px' }}
               loading="lazy"
             />
             <div
@@ -39,7 +40,7 @@ export default function Sobre() {
             />
           </Reveal>
 
-          <div className="flex flex-col justify-center gap-8 px-8 lg:px-16 py-20">
+          <div className="flex flex-col justify-center gap-8 px-6 sm:px-10 lg:px-16 py-16 lg:py-20">
 
             <Reveal>
               <p
@@ -50,7 +51,7 @@ export default function Sobre() {
               </p>
               <h2
                 className="font-bold uppercase"
-                style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', letterSpacing: '0.04em', lineHeight: 1.15 }}
+                style={{ fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', letterSpacing: '0.04em', lineHeight: 1.15 }}
               >
                 Dra. Lara Oliveira
               </h2>
@@ -63,40 +64,42 @@ export default function Sobre() {
                   className="font-light leading-relaxed"
                   style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
                 >
-                  Cada rosto chega com uma história. Antes de propor procedimento,
-                  eu escuto, examino e explico o que faz sentido — e o que não faz.
+                  Sou médica com especialização em dermatologia clínica e estética e formação em
+                  tricologia. Atendo pelo CRM 200235 no consultório do Jardim Glória, em Olímpia.
                 </p>
                 <p
                   className="font-light leading-relaxed"
                   style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
                 >
-                  Você sai da consulta sabendo exatamente o que vai acontecer e por quê.
-                  Atendimento individual, sem pressa, sem pacote padrão.
+                  Faço o atendimento sozinha. Sem assistente passando triagem, sem balcão de
+                  vendas. Você marca, eu te examino, te mostro o que cada técnica realmente faz,
+                  quanto dura, quanto custa, e você decide na sua hora se quer marcar.
                 </p>
                 <p
-                  className="font-light tracking-wide"
-                  style={{ color: 'var(--text-3)', fontSize: '0.75rem', marginTop: '4px' }}
+                  className="font-light leading-relaxed"
+                  style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}
                 >
-                  CRM 200235 · Dermatologia Clínica e Estética · Tricologia
+                  Se você não precisa de procedimento, eu falo. Se precisa de algo que eu não
+                  faço, eu indico colega de confiança da minha rede.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={200}>
-              <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2">
                 {PILLARS.map((pillar) => (
                   <div key={pillar.label} className="flex flex-col items-start gap-3">
                     <div style={{ color: 'var(--gold)' }}>{pillar.icon}</div>
                     <div>
                       <p
-                        className="uppercase tracking-widest font-semibold leading-tight mb-1"
+                        className="uppercase tracking-widest font-semibold leading-tight mb-1.5"
                         style={{ color: '#FFFFFF', fontSize: '0.65rem' }}
                       >
                         {pillar.label}
                       </p>
                       <p
                         className="font-light leading-snug"
-                        style={{ color: 'var(--text-3)', fontSize: '0.72rem' }}
+                        style={{ color: 'var(--text-3)', fontSize: '0.74rem' }}
                       >
                         {pillar.desc}
                       </p>

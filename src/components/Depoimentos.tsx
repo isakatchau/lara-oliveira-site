@@ -3,16 +3,16 @@ import Reveal from './Reveal';
 const DEPOIMENTOS = [
   {
     quote:
-      'Cheguei achando que precisava de preenchimento. A Dra. me explicou que o que estava me incomodando era olheira, não falta de volume. Tratamento certo, gastei menos, resultado melhor.',
+      'Cheguei achando que precisava de preenchimento debaixo do olho. A Dra. me explicou que o que estava me incomodando era olheira pigmentar, não falta de volume. Fizemos skinbooster e clareamento, gastei menos do que ia gastar e o resultado ficou muito melhor.',
     name: 'Camila R.',
     age: 34,
-    procedimento: 'Avaliação + skinbooster',
+    procedimento: 'Skinbooster + clareamento',
     tempo: 'Há 3 meses',
     stars: 5,
   },
   {
     quote:
-      'Já tinha feito botox em outro lugar e fiquei com sobrancelha caída. A Dra. corrigiu e desde então só faço com ela. Mão leve e honesta.',
+      'Tinha feito botox em outro lugar e fiquei com a sobrancelha caindo. A Dra. corrigiu numa sessão e desde então só faço com ela. Mão leve e ela calcula a dose pelo meu rosto, não joga uma quantidade padrão.',
     name: 'Ana M.',
     age: 42,
     procedimento: 'Toxina botulínica',
@@ -21,7 +21,7 @@ const DEPOIMENTOS = [
   },
   {
     quote:
-      'O que mais valorizei foi não ter sido empurrada para um pacote. A cada retorno ela avalia o que faz sentido naquele momento.',
+      'O que eu mais valorizo é que ela não me empurrou pacote. A cada retorno ela vê o que faz sentido naquele momento. Se for pra esperar 6 meses, ela fala pra esperar.',
     name: 'Beatriz S.',
     age: 38,
     procedimento: 'Harmonização facial',
@@ -32,14 +32,14 @@ const DEPOIMENTOS = [
 
 export default function Depoimentos() {
   return (
-    <section id="depoimentos" className="py-24" style={{ background: 'var(--bg-1)' }}>
+    <section id="depoimentos" className="py-20 lg:py-24" style={{ background: 'var(--bg-1)' }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         <Reveal>
-          <SectionHeader title="O que pacientes dizem" />
+          <SectionHeader title="O que pacientes contam" />
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-14">
+        <div className="grid md:grid-cols-3 gap-5 lg:gap-6 mt-12 lg:mt-14">
           {DEPOIMENTOS.map((dep, i) => (
             <Reveal key={dep.name} delay={i * 100}>
               <DepoCard {...dep} />
@@ -49,8 +49,8 @@ export default function Depoimentos() {
 
         <Reveal delay={300}>
           <p
-            className="text-center font-light mt-10"
-            style={{ color: 'var(--text-3)', fontSize: '0.7rem' }}
+            className="text-center font-light mt-10 max-w-xl mx-auto"
+            style={{ color: 'var(--text-3)', fontSize: '0.72rem' }}
           >
             Depoimentos coletados com consentimento. Resultados variam conforme avaliação individual.
           </p>
@@ -72,7 +72,7 @@ function DepoCard({
   const initial = name.trim().charAt(0).toUpperCase();
   return (
     <div
-      className="flex flex-col gap-5 p-7 relative h-full tilt-card"
+      className="flex flex-col gap-5 p-6 sm:p-7 relative h-full tilt-card"
       style={{
         background: '#0E0E0E',
         border: '1px solid var(--line)',
@@ -84,8 +84,8 @@ function DepoCard({
           color: 'var(--gold)',
           fontSize: '5rem',
           lineHeight: 1,
-          top: '8px',
-          left: '20px',
+          top: '6px',
+          left: '18px',
           opacity: 0.32,
           fontFamily: "'Cormorant Garamond', serif",
         }}
@@ -104,20 +104,20 @@ function DepoCard({
 
       <p
         className="font-light leading-relaxed flex-1"
-        style={{ color: 'var(--text-2)', fontSize: '0.88rem' }}
+        style={{ color: 'var(--text-2)', fontSize: '0.86rem' }}
       >
         {quote}
       </p>
 
-      <div className="flex items-center gap-3 pt-2" style={{ borderTop: '1px solid var(--line)' }}>
+      <div className="flex items-center gap-3 pt-4" style={{ borderTop: '1px solid var(--line)' }}>
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold uppercase mt-3"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold uppercase"
           style={{ background: 'rgba(201,169,122,0.15)', color: 'var(--gold)' }}
           aria-hidden="true"
         >
           {initial}
         </div>
-        <div className="mt-3">
+        <div>
           <p
             className="font-medium uppercase tracking-widest"
             style={{ color: '#FFFFFF', fontSize: '0.72rem' }}
@@ -140,8 +140,8 @@ function SectionHeader({ title }: { title: string }) {
   return (
     <div className="text-center">
       <h2
-        className="font-bold uppercase tracking-[0.22em]"
-        style={{ fontSize: 'clamp(1.4rem, 2.6vw, 1.8rem)' }}
+        className="font-bold uppercase tracking-[0.18em]"
+        style={{ fontSize: 'clamp(1.3rem, 2.6vw, 1.8rem)' }}
       >
         {title}
       </h2>
