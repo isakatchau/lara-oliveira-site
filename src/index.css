@@ -183,14 +183,18 @@ a, button {
 .tilt-card::before {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: 0;
   padding: 1px;
   border-radius: inherit;
+  /* farthest-corner garante que o gradient sempre alcanca o canto mais
+     distante do card, independente da posicao do cursor — evita o efeito
+     "torto" onde um lado nao recebia brilho. */
   background: radial-gradient(
-    260px circle at var(--mx, 50%) var(--my, 50%),
+    circle farthest-corner at var(--mx, 50%) var(--my, 50%),
     var(--gold),
-    color-mix(in srgb, var(--gold) 28%, transparent) 32%,
-    transparent 65%
+    color-mix(in srgb, var(--gold) 45%, transparent) 35%,
+    color-mix(in srgb, var(--gold) 18%, transparent) 65%,
+    color-mix(in srgb, var(--gold) 8%, transparent) 100%
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,

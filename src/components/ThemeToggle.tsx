@@ -16,7 +16,7 @@ export default function ThemeToggle({ className = '', size = 16 }: Props) {
       onClick={toggle}
       aria-label={isLight ? 'Mudar para modo escuro' : 'Mudar para modo claro'}
       title={isLight ? 'Modo escuro' : 'Modo claro'}
-      className={`inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 ${className}`}
+      className={`inline-flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 ${className}`}
       style={{
         border: '1px solid var(--line-strong)',
         color: 'var(--gold)',
