@@ -107,36 +107,31 @@ export default function Hero() {
 
           <Reveal
             delay={120}
-            className="relative flex items-end justify-center lg:justify-end h-full order-first lg:order-last"
+            className="relative flex items-center justify-center lg:justify-end h-full order-first lg:order-last"
           >
             <div
-              className="relative w-full max-w-sm sm:max-w-md lg:max-w-full mx-auto"
-              style={{ height: 'clamp(380px, 70vh, 620px)' }}
+              className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto"
+              style={{ aspectRatio: '1 / 1' }}
             >
               <div
-                className="absolute top-6 right-0 w-full h-full"
+                className="absolute inset-0 pointer-events-none"
                 style={{
                   border: '1px solid var(--line-strong)',
-                  transform: 'translate(10px, -10px)',
+                  transform: 'translate(12px, -12px)',
                 }}
                 aria-hidden="true"
               />
-              <div className="relative z-10 w-full h-full">
+              <div className="relative z-10 w-full h-full overflow-hidden">
                 <Picture
                   base="lara"
                   widths={[640]}
                   alt="Dra. Lara Oliveira, dermatologista em Olímpia/SP"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center top' }}
+                  className="w-full h-full object-contain"
                   loading="eager"
                   fetchPriority="high"
-                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  sizes="(max-width: 1024px) 90vw, 40vw"
                 />
               </div>
-              <div
-                className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
-                style={{ background: 'var(--fade-to-bg)' }}
-              />
             </div>
           </Reveal>
 
