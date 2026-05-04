@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
+  <g stroke="#C9A97A" stroke-opacity="0.18" fill="none">
+    <path d="M 0 300 Q 400 200 800 300 T 1600 300" stroke-width="1"/>
+    <path d="M 0 350 Q 400 250 800 350 T 1600 350" stroke-width="1"/>
+    <path d="M 0 400 Q 400 300 800 400 T 1600 400" stroke-width="1"/>
+  </g>
+</svg>
