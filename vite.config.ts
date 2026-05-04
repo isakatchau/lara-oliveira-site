@@ -4,6 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // GitHub Pages serves at https://<user>.github.io/<repo>/ — only in production build.
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/lara-oliveira-site/' : '/',
+  base: command === 'build' ? (process.env.BASE_PATH ?? '/lara-oliveira-site/') : '/',
   plugins: [react(), tailwindcss()],
 }))
